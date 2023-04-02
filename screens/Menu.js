@@ -1,41 +1,72 @@
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import { View, Text, StyleSheet, SectionList } from "react-native";
 
 const menuItemsToDisplay = [
-    { name: 'Hummus', id: '1A' },
-    { name: 'Moutabal', id: '2B' },
-    { name: 'Falafel', id: '3C' },
-    { name: 'Marinated Olives', id: '4D' },
-    { name: 'Kofta', id: '5E' },
-    { name: 'Eggplant Salad', id: '6F' },
-    { name: 'Lentil Burger', id: '7G' },
-    { name: 'Smoked Salmon', id: '8H' },
-    { name: 'Kofta Burger', id: '9I' },
-    { name: 'Turkish Kebab', id: '10J' },
-    { name: 'Fries', id: '11K' },
-    { name: 'Buttered Rice', id: '12L' },
-    { name: 'Bread Sticks', id: '13M' },
-    { name: 'Pita Pocket', id: '14N' },
-    { name: 'Lentil Soup', id: '15O' },
-    { name: 'Greek Salad', id: '16Q' },
-    { name: 'Rice Pilaf', id: '17R' },
-    { name: 'Baklava', id: '18S' },
-    { name: 'Tartufo', id: '19T' },
-    { name: 'Tartufo', id: '20U' },
-    { name: 'Tiramisu', id: '21V' },
-    { name: 'Panna Cotta', id: '22W' },
+    {
+        title: 'Appetizers',
+        data: [
+            { name: 'Hummus', price: '$5.00' },
+            { name: 'Moutabal', price: '$5.00' },
+            { name: 'Falafel', price: '$7.50' },
+            { name: 'Marinated Olives', price: '$5.00' },
+            { name: 'Kofta', price: '$5.00' },
+            { name: 'Eggplant Salad', price: '$8.50' },
+        ],
+    },
+    {
+        title: 'Main Dishes',
+        data: [
+            { name: 'Lentil Burger', price: '$10.00' },
+            { name: 'Smoked Salmon', price: '$14.00' },
+            { name: 'Kofta Burger', price: '$11.00' },
+            { name: 'Turkish Kebab', price: '$15.50' },
+        ],
+    },
+    {
+        title: 'Sides',
+        data: [
+            { name: 'Fries', price: '$3.00', id: '11K' },
+            { name: 'Buttered Rice', price: '$3.00' },
+            { name: 'Bread Sticks', price: '$3.00' },
+            { name: 'Pita Pocket', price: '$3.00' },
+            { name: 'Lentil Soup', price: '$3.75' },
+            { name: 'Greek Salad', price: '$6.00' },
+            { name: 'Rice Pilaf', price: '$4.00' },
+        ],
+    },
+    {
+        title: 'Desserts',
+        data: [
+            { name: 'Baklava', price: '$3.00' },
+            { name: 'Tartufo', price: '$3.00' },
+            { name: 'Tiramisu', price: '$5.00' },
+            { name: 'Panna Cotta', price: '$5.00' },
+        ],
+    },
 ];
 
 const MenuItem = ({ item }) => (
-    <View style={styles.itemContainer}>
-        <Text style={styles.itemText}>{item.name}</Text>
+    <View style={styles.ItemContainer}>
+        <Text style={styles.ItemText}>{item.name}</Text>
+    </View>
+);
+
+const SectionHeader = ({ section: { title } }) => (
+    <View style={styles.SectionHeader}>
+        <Text style={styles.SectionHeaderText}>{title}</Text>
     </View>
 );
 
 export default function Menu() {
     return (
         <View style={styles.Menu}>
-            <Text style={styles.MenuHeader}>View Menu</Text>
-            <FlatList data={menuItemsToDisplay} keyExtractor={item => item.id} renderItem={MenuItem}></FlatList>
+            <SectionList
+                sections={menuItemsToDisplay}
+                keyExtractor={(item, index) => item + index}
+                renderSectionHeader={SectionHeader}
+                renderItem={MenuItem}
+                style={{ marginTop: 16 }}
+            >
+            </SectionList>
         </View>
     );
 };
@@ -46,18 +77,21 @@ const styles = StyleSheet.create({
         width: "100%",
         backgroundColor: '#00000030',
     },
-    MenuHeader: {
-        color: 'white',
-        fontSize: 40,
-        flexWrap: 'wrap',
-        textAlign: 'center',
-    },
-    itemContainer: {
+    ItemContainer: {
         paddingHorizontal: 40,
         paddingVertical: 20,
     },
-    itemText: {
-        color: '#F4CE14',
+    ItemText: {
         fontSize: 36,
+        color: '#F4CE14',
+    },
+    SectionHeader: {
+        backgroundColor: '#F4CE14',
+    },
+    SectionHeaderText: {
+        color: 'black',
+        fontSize: 26,
+        flexWrap: 'wrap',
+        textAlign: 'center',
     },
 });
