@@ -2,15 +2,14 @@ import { StyleSheet, SafeAreaView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Welcome from './screens/Welcome';
-import Menu from './screens/Menu';
+import Login from './screens/Login';
 
 export default function App() {
   return (
     <SafeAreaView style={styles.App}>
       <StatusBar style="auto" translucent={false} />
       <Header />
-      <Menu />
+      <Login />
       <Footer />
     </SafeAreaView>
   );
